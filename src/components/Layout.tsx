@@ -75,7 +75,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {/* Minimal Footer */}
       <footer className="w-full bg-white py-12 px-6 border-t border-black/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-           <p className="text-[11px] font-medium tracking-[0.2em] uppercase opacity-30">© 2024 DIVCRAFT AI PLATFORM</p>
+           <p className="text-[11px] font-medium tracking-[0.2em] uppercase opacity-30">© 2026 DIVCRAFT AI PLATFORM</p>
            <div className="flex gap-8">
              <a href="https://instagram.com/i_rxhmxn_" target="_blank" rel="noopener noreferrer" className="text-[11px] font-medium tracking-[0.2em] uppercase opacity-30 hover:opacity-100 transition-opacity">Instagram</a>
              <a href="https://github.com/Abd-Rahman-Cyber" target="_blank" rel="noopener noreferrer" className="text-[11px] font-medium tracking-[0.2em] uppercase opacity-30 hover:opacity-100 transition-opacity">GitHub</a>

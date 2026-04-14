@@ -107,23 +107,32 @@ export default function Home() {
 
       {/* Features capabilities Section [White Theme] */}
       <section className="relative py-32 bg-gray-50 border-y border-gray-100">
-        <div className="mx-auto max-w-6xl px-6 text-center">
+        <div className="mx-auto max-w-6xl px-6 text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-black mb-8">Unmatched Capabilities.</h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto mb-20">We've built the ultimate toolkit for modern web developers to bridge the gap between inspiration and implementation.</p>
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">We've built the ultimate toolkit for modern web developers to bridge the gap between inspiration and implementation.</p>
+        </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            {[
-              { icon: <Blocks />, title: "DOM Parsing", desc: "Advanced tree analysis for nested elements." },
-              { icon: <LayoutTemplate />, title: "Layout Mapping", desc: "Intelligent grid and flexbox detection." },
-              { icon: <Smartphone />, title: "Responsive Control", desc: "Automatic breakpoint generation." },
-              { icon: <Wand2 />, title: "AI Polishing", desc: "Refines messy code into modular structures." },
-              { icon: <Layers />, title: "Deep Inspection", desc: "Captures pseudo-elements and animations." },
-              { icon: <Paintbrush />, title: "Styles Sync", desc: "Perfectly maps colors and typography." },
-            ].map((feature, i) => (
-              <div key={i} className="p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center mb-8 border border-gray-200 text-black">{feature.icon}</div>
-                <h3 className="text-xl font-medium text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{feature.desc}</p>
+        <div className="relative w-full overflow-hidden flex pb-4">
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+          
+          <div className="flex animate-marquee-infinite w-[max-content]">
+            {[...Array(2)].map((_, loopIndex) => (
+              <div key={loopIndex} className="flex gap-8 px-4 text-left">
+                {[
+                  { icon: <Blocks />, title: "DOM Parsing", desc: "Advanced tree analysis for nested elements." },
+                  { icon: <LayoutTemplate />, title: "Layout Mapping", desc: "Intelligent grid and flexbox detection." },
+                  { icon: <Smartphone />, title: "Responsive Control", desc: "Automatic breakpoint generation." },
+                  { icon: <Wand2 />, title: "AI Polishing", desc: "Refines messy code into modular structures." },
+                  { icon: <Layers />, title: "Deep Inspection", desc: "Captures pseudo-elements and animations." },
+                  { icon: <Paintbrush />, title: "Styles Sync", desc: "Perfectly maps colors and typography." },
+                ].map((feature, i) => (
+                  <div key={`${loopIndex}-${i}`} className="w-[320px] md:w-[400px] shrink-0 p-10 rounded-[2.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center mb-8 border border-gray-200 text-black">{feature.icon}</div>
+                    <h3 className="text-xl font-medium text-gray-900 mb-3">{feature.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed">{feature.desc}</p>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
@@ -176,8 +185,8 @@ export default function Home() {
               <div className="mt-8 flex items-center gap-4 not-italic">
                 <div className="w-10 h-10 rounded-full bg-blue-500/10" />
                 <div>
-                  <p className="text-sm font-bold text-black">Alex Volkov</p>
-                  <p className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase mt-1">Founding Designer</p>
+                  <p className="text-sm font-bold text-black">Rahman</p>
+                  <p className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase mt-1">Founder</p>
                 </div>
               </div>
             </div>

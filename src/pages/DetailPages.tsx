@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { 
   ArrowRight, MousePointerClick, LayoutTemplate, Zap, ShieldCheck, 
   Layers, Cpu, Globe, Terminal, CheckCircle2, ChevronRight, 
   HelpCircle, Rocket, Code2, Users, Lock, CreditCard,
-  Eye, Monitor, Fingerprint, Activity, Box
+  Eye, Monitor, Fingerprint, Activity, Box, Download, X, Puzzle
 } from "lucide-react";
 import { PageTransition } from "@/src/components/PageTransition";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ProductDemo } from "@/src/components/ProductDemo";
 
 const PageContainer: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => {
   const letters = title.split("");
@@ -56,27 +57,84 @@ export const CapturePage = () => (
   <PageContainer title="Capture">
     <div className="space-y-48">
       {/* Hero Intro */}
+      {/* Hero Intro */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold tracking-widest uppercase mb-4">
+        <div className="space-y-8 max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold tracking-widest uppercase">
             <Activity size={12} /> Live Engine v2.4
           </div>
           <h2 className="text-4xl md:text-6xl font-medium text-gray-900 leading-[1.05] tracking-tight">The world's most accurate DOM analysis engine.</h2>
-          <p className="text-gray-500 text-xl leading-relaxed">DivCraft doesn’t just copy code—it understands it. Our capture engine performs a deep architectural audit, translating computed browser states into clean, semantic React & Tailwind components.</p>
-          <div className="flex flex-wrap gap-4 pt-4">
-            <button className="px-10 py-5 bg-black text-white font-bold tracking-widest uppercase rounded-full hover:scale-105 transition-all flex items-center gap-2 shadow-2xl">
+          <p className="text-gray-500 text-xl leading-relaxed">DivCraft doesn't just copy code—it understands it. Our capture engine performs a deep architectural audit, translating computed browser states into clean, semantic React & Tailwind components.</p>
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="/divcraft-extension.zip"
+              download="divcraft-extension.zip"
+              className="px-10 py-5 bg-black text-white font-bold tracking-widest uppercase rounded-full hover:scale-105 transition-all flex items-center gap-2 shadow-2xl"
+            >
               Add to Chrome <ArrowRight size={16} />
-            </button>
-            <button className="px-10 py-5 bg-white text-black border border-gray-100 font-bold tracking-widest uppercase rounded-full hover:bg-gray-50 transition-colors shadow-sm">
-              Watch Demo
-            </button>
+            </a>
           </div>
         </div>
-        <div className="bg-gray-50 aspect-square rounded-[3.5rem] border border-gray-100 flex items-center justify-center p-12 shadow-inner relative overflow-hidden group">
-           <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-           <MousePointerClick size={160} className="text-black opacity-10 group-hover:scale-110 transition-transform duration-700" strokeWidth={1} />
+
+        {/* Interactive Pointer UI Block */}
+        <div className="bg-white aspect-square rounded-[3.5rem] border border-gray-100 flex items-center justify-center p-12 shadow-sm relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-700 hover:-translate-y-2">
+           {/* Subtle Blueprint Grid */}
+           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-40 group-hover:opacity-60 transition-opacity" />
+           
+           <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+           
+           <div className="relative">
+              {/* Animated Target Rings */}
+              <div className="absolute inset-0 -m-12 rounded-full border border-blue-500/0 group-hover:border-blue-500/20 group-hover:animate-ping transition-colors duration-500" style={{ animationDuration: '2s' }} />
+              <div className="absolute inset-0 -m-6 rounded-full border border-blue-500/0 group-hover:border-blue-500/20 group-hover:animate-ping transition-colors duration-500 delay-150" style={{ animationDuration: '2s' }} />
+              
+              <MousePointerClick size={120} className="text-gray-200 group-hover:text-blue-500 group-hover:scale-110 group-active:scale-95 transition-all duration-500 relative z-10 drop-shadow-sm" strokeWidth={1} />
+           </div>
+           
+           {/* Interactive Hover Badge */}
+           <div className="absolute bottom-10 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+              <span className="text-[10px] uppercase tracking-widest font-bold text-gray-500 bg-white border border-gray-100 px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                Click to inspect elements
+              </span>
+           </div>
         </div>
       </div>
+        {/* Animated Background Marquee with Centered Quote */}
+        <div className="relative w-full overflow-hidden flex py-32 mt-12 mb-12">
+          {/* Gradients to fade edges for the background marquee */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-64 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-64 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          
+          {/* Scrolling Background Text (Subtle/Outline) */}
+          <div className="flex animate-marquee-infinite w-[max-content] items-center gap-24 opacity-10 pointer-events-none">
+            {[...Array(2)].map((_, loopIndex) => (
+              <div key={loopIndex} className="flex gap-24 items-center text-[120px] md:text-[240px] font-black tracking-tighter whitespace-nowrap text-transparent" style={{ WebkitTextStroke: '3px black' }}>
+                <span>SPEED</span>
+                <span>✦</span>
+                <span>PRECISION</span>
+                <span>✦</span>
+                <span>SCALE</span>
+                <span>✦</span>
+                <span>ARCHITECTURE</span>
+                <span>✦</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Centered Static Quote Overlay */}
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6">
+            <div className="text-center max-w-4xl relative">
+              <span className="text-gray-200 text-8xl font-serif absolute -top-12 -left-8 -z-10 select-none">"</span>
+              <p className="text-3xl md:text-5xl font-bold text-black tracking-tight leading-[1.2]">
+                The cleanest React code I've ever seen from an extraction tool.
+              </p>
+            </div>
+          </div>
+        </div>
+        <ProductDemo />
+
+
 
       {/* Visual Demo Gallery (Before & After) */}
       <section className="space-y-16">
@@ -151,28 +209,7 @@ export const CapturePage = () => (
         </div>
       </section>
 
-      {/* The IDE Bridge */}
-      <section className="text-center space-y-20">
-         <div className="space-y-4 max-w-2xl mx-auto">
-            <h3 className="text-4xl font-bold">The Bridge.</h3>
-            <p className="text-gray-500 text-lg">Hit "Capture" in your browser and see the module appear instantly in your favorite editor. No manual file management required.</p>
-         </div>
-         <div className="relative max-w-4xl mx-auto group">
-            <div className="bg-gray-200 aspect-video rounded-[3rem] border border-gray-300 shadow-2xl overflow-hidden relative transition-all duration-1000 group-hover:grayscale group-hover:opacity-80">
-               <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="flex gap-8 items-center bg-white/80 backdrop-blur-xl px-12 py-6 rounded-[2.5rem] shadow-2xl border border-white/50">
-                     <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white"><Globe size={32} /></div>
-                     <ArrowRight size={24} className="text-gray-300 animate-bounce-horizontal" />
-                     <div className="w-16 h-16 bg-neutral-900 rounded-2xl flex items-center justify-center text-white"><Terminal size={32} /></div>
-                  </div>
-               </div>
-            </div>
-            <div className="absolute -bottom-10 -right-10 md:w-64 p-8 bg-white border border-gray-100 shadow-2xl rounded-3xl hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 text-left">Real-time Feedback</p>
-               <p className="text-xs text-gray-900 font-medium text-left leading-relaxed">Socket connection active. Component sync complete in 12ms.</p>
-            </div>
-         </div>
-      </section>
+
 
       {/* Technical Reliability & Privacy */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-40">
@@ -195,93 +232,172 @@ export const CapturePage = () => (
   </PageContainer>
 );
 
-export const PricingPage = () => (
-  <PageContainer title="Pricing">
-    <div className="space-y-32">
-      {/* Tier Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-8">
-        {[
-          { name: "Starter", price: "Free", desc: "For hobbyists exploring inspiration.", features: ["50 extractions / month", "HTML/CSS Export", "Community Support", "Basic Templates"] },
-          { name: "Pro", price: "$24", featured: true, desc: "For builders who ship professional sites.", features: ["Unlimited extractions", "Tailwind + React Export", "Priority AI Support", "Advanced CLI Sync", "Private Dashboard"] },
-          { name: "Enterprise", price: "Custom", desc: "For teams growing at scale.", features: ["All Pro features", "Custom AI Models", "SSO & Security", "Team Collaboration", "API Access"] }
-        ].map((tier, i) => (
-          <div key={i} className={`p-10 rounded-[2.5rem] border ${tier.featured ? 'bg-black text-white border-transparent shadow-2xl scale-105 z-10' : 'bg-white text-black border-gray-100 shadow-sm'} flex flex-col`}>
-            {tier.featured && <div className="bg-blue-600 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full w-fit mb-6">Recommended</div>}
-            <h3 className="text-2xl font-bold mb-2 uppercase tracking-tighter">{tier.name}</h3>
-            <p className={`text-sm mb-8 ${tier.featured ? 'text-gray-400' : 'text-gray-500'}`}>{tier.desc}</p>
-            <div className="text-6xl font-bold mb-10 tracking-tighter">{tier.price}{tier.name !== "Enterprise" && <span className="text-sm font-normal opacity-50 ml-2">/mo</span>}</div>
+const ExtensionModal: React.FC<{ isOpen: boolean; onClose: () => void; planName: string }> = ({ isOpen, onClose, planName }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="relative bg-white rounded-[3rem] p-12 max-w-lg w-full shadow-2xl overflow-hidden border border-gray-100"
+          >
+            {/* Background Accent */}
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
             
-            <ul className="space-y-4 mb-12 flex-1">
-              {tier.features.map(f => (
-                <li key={f} className="flex items-center gap-3 text-sm font-medium">
-                  <CheckCircle2 size={16} className={tier.featured ? "text-blue-500" : "text-blue-600"} /> {f}
-                </li>
-              ))}
-            </ul>
-            
-            <button className={`w-full py-5 rounded-full font-bold tracking-widest uppercase text-[12px] transition-all hover:scale-[1.02] ${tier.featured ? 'bg-white text-black shadow-[0_0_40px_rgba(255,255,255,0.2)]' : 'bg-black text-white hover:bg-gray-800'}`}>
-              Select Plan
+            <button 
+              onClick={onClose}
+              className="absolute top-8 right-8 p-2 text-gray-400 hover:text-black transition-colors"
+            >
+              <X size={24} />
             </button>
+
+            <div className="flex flex-col items-center text-center space-y-8">
+              <div className="w-20 h-20 bg-blue-50 rounded-[2rem] flex items-center justify-center text-blue-600 mb-2">
+                <Puzzle size={40} />
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-3xl font-bold tracking-tight text-black">Extension Required</h3>
+                <p className="text-gray-500 leading-relaxed text-lg">
+                  To unlock the <span className="font-bold text-black">{planName}</span> plan features, you must first install the DivCraft Chrome extension.
+                </p>
+              </div>
+
+              <div className="w-full space-y-4">
+                <a 
+                  href="/divcraft-extension.zip" 
+                  download="divcraft-extension.zip"
+                  className="flex items-center justify-center gap-3 w-full py-5 bg-black text-white rounded-full font-bold tracking-widest uppercase text-[12px] hover:scale-[1.02] transition-all shadow-xl"
+                >
+                  Download Extension <Download size={18} />
+                </a>
+                <button 
+                  onClick={onClose}
+                  className="w-full py-5 bg-gray-50 text-gray-400 hover:text-gray-900 rounded-full font-bold tracking-widest uppercase text-[12px] transition-colors"
+                >
+                  Maybe Later
+                </button>
+              </div>
+
+              <div className="pt-4 flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                <ShieldCheck size={14} className="text-emerald-500" /> Secure • Official Extension
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export const PricingPage = () => {
+  const [selectedTier, setSelectedTier] = useState<string | null>(null);
+
+  return (
+    <PageContainer title="Pricing">
+      <ExtensionModal
+        isOpen={!!selectedTier}
+        onClose={() => setSelectedTier(null)}
+        planName={selectedTier || ""}
+      />
+      <div className="space-y-32">
+        {/* Tier Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-8">
+          {[
+            { name: "Starter", price: "Free", desc: "For hobbyists exploring inspiration.", features: ["50 extractions / month", "HTML/CSS Export", "Community Support", "Basic Templates"] },
+            { name: "Pro", price: "$24", featured: true, desc: "For builders who ship professional sites.", features: ["Unlimited extractions", "Tailwind + React Export", "Priority AI Support", "Advanced CLI Sync", "Private Dashboard"] },
+            { name: "Enterprise", price: "Custom", desc: "For teams growing at scale.", features: ["All Pro features", "Custom AI Models", "SSO & Security", "Team Collaboration", "API Access"] }
+          ].map((tier, i) => (
+            <div key={i} className={`p-10 rounded-[2.5rem] border ${tier.featured ? 'bg-black text-white border-transparent shadow-2xl scale-105 z-10' : 'bg-white text-black border-gray-100 shadow-sm'} flex flex-col`}>
+              {tier.featured && <div className="bg-blue-600 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full w-fit mb-6">Recommended</div>}
+              <h3 className="text-2xl font-bold mb-2 uppercase tracking-tighter">{tier.name}</h3>
+              <p className={`text-sm mb-8 ${tier.featured ? 'text-gray-400' : 'text-gray-500'}`}>{tier.desc}</p>
+              <div className="text-6xl font-bold mb-10 tracking-tighter">{tier.price}{tier.name !== "Enterprise" && <span className="text-sm font-normal opacity-50 ml-2">/mo</span>}</div>
+
+              <ul className="space-y-4 mb-12 flex-1">
+                {tier.features.map(f => (
+                  <li key={f} className="flex items-center gap-3 text-sm font-medium">
+                    <CheckCircle2 size={16} className={tier.featured ? "text-blue-500" : "text-blue-600"} /> {f}
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                onClick={() => setSelectedTier(tier.name)}
+                className={`w-full py-5 rounded-full font-bold tracking-widest uppercase text-[12px] transition-all hover:scale-[1.02] ${tier.featured ? 'bg-white text-black shadow-[0_0_40px_rgba(255,255,255,0.2)]' : 'bg-black text-white hover:bg-gray-800'}`}
+              >
+                Select Plan
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Feature Comparison Table */}
+        <div className="bg-white border border-gray-100 rounded-[3rem] overflow-hidden shadow-sm">
+          <div className="p-12 border-b border-gray-100">
+            <SectionHeader title="Compare all features" subtitle="Find the perfect fit for your development needs." />
           </div>
-        ))}
-      </div>
-
-      {/* Feature Comparison Table */}
-      <div className="bg-white border border-gray-100 rounded-[3rem] overflow-hidden shadow-sm">
-        <div className="p-12 border-b border-gray-100">
-          <SectionHeader title="Compare all features" subtitle="Find the perfect fit for your development needs." />
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="bg-gray-50 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                <th className="px-12 py-6">Feature</th>
-                <th className="px-12 py-6 text-center">Starter</th>
-                <th className="px-12 py-6 text-center">Pro</th>
-                <th className="px-12 py-6 text-center text-blue-600">Enterprise</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 text-sm">
-              {[
-                { name: "Monthly Extractions", s: "50", p: "Unlimited", e: "Unlimited" },
-                { name: "Code Format", s: "HTML", p: "React/TSX", e: "Custom" },
-                { name: "Style Framework", s: "Inline CSS", p: "Tailwind 4", e: "Unified Design System" },
-                { name: "Support", s: "Community", p: "Priority", e: "Dedicated Manager" },
-                { name: "Sync to CLI", s: "-", p: "✓", e: "✓" }
-              ].map((row, i) => (
-                <tr key={i} className="hover:bg-gray-50/50 transition-colors">
-                  <td className="px-12 py-6 font-bold text-gray-900">{row.name}</td>
-                  <td className="px-12 py-6 text-center text-gray-500">{row.s}</td>
-                  <td className="px-12 py-6 text-center text-gray-900 font-medium">{row.p}</td>
-                  <td className="px-12 py-6 text-center text-gray-900 font-bold">{row.e}</td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="bg-gray-50 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                  <th className="px-12 py-6">Feature</th>
+                  <th className="px-12 py-6 text-center">Starter</th>
+                  <th className="px-12 py-6 text-center">Pro</th>
+                  <th className="px-12 py-6 text-center text-blue-600">Enterprise</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-100 text-sm">
+                {[
+                  { name: "Monthly Extractions", s: "50", p: "Unlimited", e: "Unlimited" },
+                  { name: "Code Format", s: "HTML", p: "React/TSX", e: "Custom" },
+                  { name: "Style Framework", s: "Inline CSS", p: "Tailwind 4", e: "Unified Design System" },
+                  { name: "Support", s: "Community", p: "Priority", e: "Dedicated Manager" },
+                  { name: "Sync to CLI", s: "-", p: "✓", e: "✓" }
+                ].map((row, i) => (
+                  <tr key={i} className="hover:bg-gray-50/50 transition-colors">
+                    <td className="px-12 py-6 font-bold text-gray-900">{row.name}</td>
+                    <td className="px-12 py-6 text-center text-gray-500">{row.s}</td>
+                    <td className="px-12 py-6 text-center text-gray-900 font-medium">{row.p}</td>
+                    <td className="px-12 py-6 text-center text-gray-900 font-bold">{row.e}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      {/* Trust & Billing */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center pb-24 border-t border-gray-100 pt-32">
-        <div className="flex flex-col items-center gap-4">
-          <CreditCard className="text-gray-400" />
-          <h4 className="font-bold">Secure Billing</h4>
-          <p className="text-sm text-gray-500">Powered by Stripe. All major credit cards accepted.</p>
-        </div>
-        <div className="flex flex-col items-center gap-4">
-          <Users className="text-gray-400" />
-          <h4 className="font-bold">Team Ready</h4>
-          <p className="text-sm text-gray-500">Easily add seats and collaborate on captured boards.</p>
-        </div>
-        <div className="flex flex-col items-center gap-4">
-          <Lock className="text-gray-400" />
-          <h4 className="font-bold">SSO & SAML</h4>
-          <p className="text-sm text-gray-500">Enterprise auth integrations for large organizations.</p>
+        {/* Trust & Billing */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center pb-24 border-t border-gray-100 pt-32">
+          <div className="flex flex-col items-center gap-4">
+            <CreditCard className="text-gray-400" />
+            <h4 className="font-bold">Secure Billing</h4>
+            <p className="text-sm text-gray-500">Powered by Stripe. All major credit cards accepted.</p>
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <Users className="text-gray-400" />
+            <h4 className="font-bold">Team Ready</h4>
+            <p className="text-sm text-gray-500">Easily add seats and collaborate on captured boards.</p>
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <Lock className="text-gray-400" />
+            <h4 className="font-bold">SSO & SAML</h4>
+            <p className="text-sm text-gray-500">Enterprise auth integrations for large organizations.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </PageContainer>
-);
+    </PageContainer>
+  );
+};
 
 export const DocsPage = () => (
   <PageContainer title="Docs">

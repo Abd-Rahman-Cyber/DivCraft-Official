@@ -12,3 +12,14 @@
     @apply bg-black text-white antialiased;
   }
 }
+
+@layer utilities {
+  @keyframes customMarquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee-infinite {
+    animation: customMarquee 30s linear infinite;
+  }
+}
+
